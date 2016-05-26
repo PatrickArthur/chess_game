@@ -1,36 +1,35 @@
 
 
 class Board
-
   def initialize
-    @array = Array.new(8) {Array.new(8)}
+    @array = Array.new(8) { Array.new(8) }
   end
 
   def set_pawns
-    i=0
-    [1,6].each do |num|
+    i = 0
+    [1, 6].each do |num|
       while i < @array[num].length
-        if num == 1
-          @array[num][i] = "P_White"
-        else
-          @array[num][i] = "P_Black"
-        end
-        i+=1
+        @array[num][i] = if num == 1
+                           'P_White'
+                         else
+                           'P_Black'
+                         end
+        i += 1
       end
-      i=0
+      i = 0
     end
     set_others
   end
 
   def set_others
-    [0,7].each do |num|
+    [0, 7].each do |num|
       if num == 0
-        set_array(num, "white")
+        set_array(num, 'white')
       else
-        set_array(num, "black")
+        set_array(num, 'black')
       end
     end
-    return @array
+    @array
   end
 
   private
@@ -47,10 +46,9 @@ class Board
   end
 end
 
-class Game 
-
-  def move_piece(x_start,y_start, x_end, y_end)
-    if @new_game[x_end][y_end] == nil
+class Game
+  def move_piece(x_start, y_start, x_end, y_end)
+    if @new_game[x_end][y_end].nil?
       @new_game[x_end][y_end] = @new_game[x_start][y_start]
       @new_game[x_start][y_start] = nil
       return @new_game
@@ -61,14 +59,13 @@ class Game
 end
 
 class Player < Game
-  
   def initialize(side)
     @side = side
-    @new_game = Board.new().set_pawns
+    @new_game = Board.new.set_pawns
   end
 end
 
-pa_test = Player.new("white")
-pa_test.move_piece(0,7,3,7)
-pa_test.move_piece(0,0,3,0)
-pa_test.move_piece(0,2,3,2)
+pa_test = Player.new('white')
+pa_test.move_piece(0, 7, 3, 7)
+pa_test.move_piece(0, 0, 3, 0)
+pa_test.move_piece(0, 2, 3, 2)
