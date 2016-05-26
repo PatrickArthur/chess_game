@@ -1,4 +1,4 @@
-
+# chess program - in progress
 
 class Board
   def initialize
