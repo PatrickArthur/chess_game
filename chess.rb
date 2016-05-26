@@ -48,6 +48,17 @@ end
 
 class Game
   def move_piece(x_start, y_start, x_end, y_end)
+    color = @new_game[x_start][y_start].split('_').last
+    if @side == 'white' && color == 'white' || @side == 'black' && color == 'black'
+      update_board(x_start, y_start, x_end, y_end)
+    else
+      puts 'wrong piece'
+    end
+  end
+
+  private
+
+  def update_board(x_start, y_start, x_end, y_end)
     if @new_game[x_end][y_end].nil?
       @new_game[x_end][y_end] = @new_game[x_start][y_start]
       @new_game[x_start][y_start] = nil
@@ -69,3 +80,4 @@ pa_test = Player.new('white')
 pa_test.move_piece(0, 7, 3, 7)
 pa_test.move_piece(0, 0, 3, 0)
 pa_test.move_piece(0, 2, 3, 2)
+pa_test.move_piece(7, 2, 3, 2)
